@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A React App for FPT company in US",
+    "githubUrl": "https://github.com/GTWFam/FPT_App"
   }
 }

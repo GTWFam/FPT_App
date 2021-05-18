@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+
 import Map from "./screens/Map";
+import Photos from "./screens/Photos";
 
 export default function App() {
   return (
