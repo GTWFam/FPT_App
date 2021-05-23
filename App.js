@@ -7,7 +7,7 @@ import Photos from "./screens/Photos";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Map />
+      <Photos />
     </View>
   );
 }

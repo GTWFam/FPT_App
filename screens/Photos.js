@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TouchableHighlight, View, Image, Text} from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
+
+import Map from './Map';
+
+let assetArr = [];
 
 function Photos(props) {
 
@@ -10,43 +14,37 @@ function Photos(props) {
         (async () => {
             if (Platform.OS !== 'web') {
                 const { status } = await MediaLibrary.requestPermissionsAsync();
-            if (status !== 'granted') {
-                alert('Sorry, we need camera roll permissions to make this work!');
+                if (status !== 'granted') {
+                    alert('Sorry, we need camera roll permissions to make this work!');
+                }
             }
-          }
-            let allAssets = await MediaLibrary.getAssetsAsync();
+            let allAssets = await MediaLibrary.getAssetsAsync({first: 50});
             let assetArray = allAssets["assets"];
-            let firstAsset = await MediaLibrary.getAssetInfoAsync(assetArray[0]);
-            setFirstAsset(firstAsset);
+            assetArray.forEach(async (asset) => {
+                let anAsset = await MediaLibrary.getAssetInfoAsync(asset);
+                setFirstAsset(anAsset);
+            })
+            
         })();
       }, []);
 
-      
-    const pickImage = async () => {};
+    let arrToPass = [];
 
-    let imgUri = null
     if (firstAsset) {
-        console.log(firstAsset.location);
-        imgUri = firstAsset.localUri;
-        console.log(imgUri)
+        assetArr.push(firstAsset);
     }    
-
-    if (imgUri) {
+    if (assetArr.length === 50) {
+        assetArr.forEach((asset) => {
+            if (asset.location !== null) {
+                arrToPass.push(asset)
+            }
+        });
         return (
-            <View style={styles.viewContainer}> 
-                <TouchableHighlight onPress={pickImage} style={styles.addPhotoButton}>
-                   <Image source={{ width: 70, height: 70, uri: imgUri }} style={styles.addPhotoButton} />
-                </TouchableHighlight>
-            </View>
+            <Map arr={{arrToPass}} ></Map>
         );
     } else {
-        return (
-            <View style={styles.viewContainer}> 
-                <Text>Loading...</Text>
-            </View>
-        );
+        return (<Text>Loading...</Text>);
     }
-    
     
 }
 
