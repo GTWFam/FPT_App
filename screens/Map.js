@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Dimensions, Text, View } from 'react-native';
-import MapView, { Marker }from 'react-native-maps';
+import { StyleSheet, Dimensions, Text, Image, TouchableOpacity } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 function Map(props) {
@@ -52,11 +52,6 @@ function Map(props) {
                 showsMyLocationButton={true}
                 showsCompass={true}
             >
-                {/* <Marker 
-                    coordinate={assetArray[0].location} 
-                    image={require('../assets/marker.png')}
-                    /> */}
-
                 {assetArray ? assetArray.map((asset) => (
                     <Marker 
                         key={asset.filename}
@@ -64,7 +59,12 @@ function Map(props) {
                         image={require('../assets/marker.png')}
                     />
                 )) : null }
-
+                <TouchableOpacity onPress={() => {}}>
+                    <Image 
+                    style={styles.cameraButton} 
+                    source={require("../assets/photo-camera.png")}
+                    />
+                </TouchableOpacity>
             </MapView>
         );
     } else {
@@ -81,8 +81,16 @@ const styles = StyleSheet.create({
     map: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
-        alignItems: "flex-end"
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
+    cameraButton: {
+        marginBottom: 20,
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: "#F0F0F0",
+      },
 })
 
 export default Map;

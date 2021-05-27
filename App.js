@@ -1,13 +1,13 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import Map from "./screens/Map";
-import Photos from "./screens/Photos";
+import MapScreen from "./screens/MapScreen";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Photos />
+      <MapScreen />
     </View>
   );
 }

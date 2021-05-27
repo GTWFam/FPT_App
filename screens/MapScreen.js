@@ -6,7 +6,7 @@ import Map from './Map';
 
 let assetArr = [];
 
-function Photos(props) {
+function MapScreen(props) {
 
     const [firstAsset, setFirstAsset] = useState(null);
 
@@ -48,18 +48,4 @@ function Photos(props) {
     
 }
 
-const styles = StyleSheet.create({
-    viewContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    addPhotoButton: {
-        width: 70,
-        height: 70,
-        borderRadius: 250,
-    },
-
-})
-
-export default Photos;
+export default MapScreen;
