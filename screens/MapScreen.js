@@ -9,6 +9,9 @@ let assetArr = [];
 function MapScreen(props) {
 
     const [firstAsset, setFirstAsset] = useState(null);
+    function moveToCamera() {
+        props.navigation.navigate("Camera");
+    }
 
     useEffect(() => {
         (async () => {
@@ -40,7 +43,7 @@ function MapScreen(props) {
             }
         });
         return (
-            <Map arr={{arrToPass}} ></Map>
+            <Map arg={{arrToPass, moveToCamera}} ></Map>
         );
     } else {
         return (<Text>Loading...</Text>);

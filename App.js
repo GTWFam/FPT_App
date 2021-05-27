@@ -1,22 +1,20 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
+import CameraScreen from "./screens/CameraScreen";
 import MapScreen from "./screens/MapScreen";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <MapScreen />
-    </View>
+    <NavigationContainer>
+    <Stack.Navigator initialRouteName="Map" headerMode="none">
+      <Stack.Screen name="Map" component={MapScreen}/>
+      <Stack.Screen name="Camera" component={CameraScreen}/>
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
